@@ -69,15 +69,20 @@
 
                     <div class="col-12">
                         <label for="login" class="form-label">Email/Name/Phone</label>
-                        <input type="text" name="login" class="form-control" id="login" required>
-                        <div class="invalid-feedback">Please enter your username.</div>
+                        <input type="text" name="login" class="form-control  @error('login') is-invalid @enderror" id="login" >
+                        @error('login')
+                            <div class="text-danger">{{$message}}</div>
+                        @enderror
+                        
                       
                     </div>
 
                     <div class="col-12">
                       <label for="yourPassword" class="form-label">Password</label>
-                      <input type="password" name="password" class="form-control" id="yourPassword" required>
-                      <div class="invalid-feedback">Please enter your password!</div>
+                      <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="yourPassword" >
+                      @error('password')
+                        <div class="text-danger">{{$message}}</div>
+                    @enderror
                     </div>
 
                     <div class="col-12">
