@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+//use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ProfileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,7 +14,7 @@ use App\Http\Controllers\AdminController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,14 +30,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
 
 Route::controller(AdminController::class)->group(function () {
 
-    Route::get('/admin/dashboard','admindashboard')->name('admin.dashboard')->middleware(['auth','adminRole:admin']);
-    Route::get('/admin/logout','adminlogout')->name('admin.logout')->middleware(['auth','adminRole:admin']);
-    Route::get('/admin/login','adminlogin')->name('admin.login');
+    Route::get('/admin/dashboard', 'admindashboard')->name('admin.dashboard')->middleware(['auth', 'adminRole:admin']);
+    Route::get('/admin/logout', 'adminlogout')->name('admin.logout')->middleware(['auth', 'adminRole:admin']);
+    Route::get('/admin/profile', 'adminprofile')->name('admin.profile')->middleware(['auth', 'adminRole:admin']);
+    Route::post('/admin/password/update', 'AdminPasswordUpdate')->name('admin.password.update')->middleware(['auth', 'adminRole:admin']);
+    Route::get('/admin/login', 'adminlogin')->name('admin.login');
 
-
-});//end group
+}); //end group
