@@ -40,4 +40,8 @@ Route::controller(AdminController::class)->group(function () {
     Route::post('/admin/password/update', 'AdminPasswordUpdate')->name('admin.password.update')->middleware(['auth', 'adminRole:admin']);
     Route::get('/admin/login', 'adminlogin')->name('admin.login');
 
+    Route::post('/admin/update/profile','update_profile')->name('admin.update.profile')->middleware(['auth', 'adminRole:admin']);
+    Route::post('/admin/remove/image','remove_image')->name('admin.remove.image')->middleware(['auth', 'adminRole:admin']);
+    Route::post('/admin/update/image','update_image')->name('admin.update.image')->middleware(['auth', 'adminRole:admin']);
+
 }); //end group

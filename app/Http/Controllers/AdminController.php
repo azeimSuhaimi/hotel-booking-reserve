@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-
 use App\Models\user;
-//use App\Models\activity_log;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
+//use App\Models\user;
 
 class AdminController extends Controller
 {
@@ -64,5 +66,112 @@ class AdminController extends Controller
 
         
     }//end method
+
+
+        //edit image for profile 
+        public function update_image(Request $request)
+        {
+            // validated input
+            $validated = $request->validate([
+                'id' => 'required',
+                'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+            $user = user::find($validated['id']);// find table  based id
+
+            // validate file upload 
+            if ($request->hasFile('file')) 
+            {
+                // get upload image to change and validated rule
+                $file = $request->file('file');
+                $fileName = time().'.'.$file->getClientOriginalExtension();// change name file avoid redundant
+        
+                $file->move(public_path('backend/assets/img/'), $fileName); // location image store
+
+                if($user->picture != 'empty.png')
+                {
+                    
+                    $filePath = public_path('backend/assets/img/'.$user->picture); // store file to location
+
+                    // delete fine from past
+                    if (File::exists($filePath)) {
+                        File::delete($filePath);
+                    }
+
+                }
+                
+                // store image name to database
+                $user->picture = $fileName;
+                $user->save();
+
+                
+                return redirect(route('admin.profile'))->with('success',$fileName);
+                
+            }//end validated file
+
+            return redirect(route('admin.profile'))->with('error','fail edit image');
+
+        }//end method
+
+        //edit image for profile 
+        public function remove_image(Request $request)
+        {
+            // validated input
+            $validated = $request->validate([
+                'id' => 'required',
+            ]);
+
+            $user = user::find($validated['id']);// find table  based id
+
+
+                if($user->picture != 'empty.png')
+                {
+                    
+                    $filePath = public_path('backend/assets/img/'.$user->picture); // store file to location
+
+                    // delete fine from past
+                    if (File::exists($filePath)) {
+                        File::delete($filePath);
+                    }
+
+                }
+                
+                // store image name to database
+                    $user->picture = 'empty.png';
+                    $user->save();
+
+                    
+
+                return redirect(route('admin.profile'))->with('success','success remove image');
+                
+
+        }//end method
+    
+            
+                //update  data 
+        public function update_profile(Request $request)
+        {
+            // validate data profile update base rule
+            $validated = $request->validate([
+                'name' => 'required|string',
+                'address' => 'required|string',
+                'phone' =>['required','numeric',Rule::unique('users')->ignore( $request->input('phone'),'phone')] ,
+    
+                
+                
+            ]);
+    
+            //store data update to database
+            $user = user::find(auth()->user()->id);
+            $user->name = $validated['name'];
+            $user->address = $validated['address'];
+            $user->phone = $validated['phone'];
+            $user->save();
+    
+            
+    
+            return redirect(route('admin.profile'))->with('success','edit details profile '.$validated['name']);
+    
+        }//end method
 
 }//end class

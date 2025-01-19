@@ -81,23 +81,51 @@
 
               <div class="tab-pane fade profile-edit pt-3" id="profile-edit">
 
-                <!-- Profile Edit Form -->
-                <form>
+                <form class="submit pb-3" onsubmit="confirmAndSubmit(this)" action="{{route('admin.update.image')}}" method="post" enctype="multipart/form-data">
+                  @csrf
+                  <input type="hidden" name="id" value="{{auth()->user()->id}}">
+
+                  <!-- Profile Edit Form -->
                   <div class="row mb-3">
                     <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile Image</label>
                     <div class="col-md-8 col-lg-9">
-                      <img src="assets/img/profile-img.jpg" alt="Profile">
-                      <div class="pt-2">
-                        <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                        <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
-                      </div>
+                      <img src="{{asset('backend/assets/img/'.auth()->user()->picture)}} " id="image-preview" alt="Profile">
+                      
                     </div>
                   </div>
 
                   <div class="row mb-3">
-                    <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
+                      <label for="file-input" class="col-md-4 col-lg-3 col-form-label @error('file') is-invalid @enderror">Select Files Here</label>
+                      <div class="col-md-8 col-lg-9">
+
+                        <input  class="form-control" name="file" id="file-input" type="file" placeholder="" />
+                      </div>
+                      
+                  </div>
+                      @error('file')
+                          <span class=" invalid-feedback mt-2">{{ $message }}</span>
+                      @enderror
+
+                      <div class="text-center">
+                          <button type="submit" class="btn btn-primary"><i class="bi bi-upload"></i></button>
+                          <button form="remove_image" type="submit"  class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                      </div>
+
+                </form>
+
+                <form id="remove_image" onsubmit="confirmAndSubmit(this)" action="{{route('admin.remove.image')}}" method="post" >
+                    @csrf
+                    <input type="hidden" name="id" value="{{auth()->user()->id}}">
+                </form>
+
+                <!-- Profile Edit Form -->
+                <form onsubmit="confirmAndSubmit(this)" action="{{route('admin.update.profile')}}" method="post">
+                  @csrf
+
+                  <div class="row mb-3">
+                    <label for="name" class="col-md-4 col-lg-3 col-form-label">Full Name</label>
                     <div class="col-md-8 col-lg-9">
-                      <input name="fullName" type="text" class="form-control" id="fullName" value="{{auth()->user()->name}}">
+                      <input name="name" type="text" class="form-control" id="name" value="{{auth()->user()->name}}">
                     </div>
                   </div>
 
@@ -115,12 +143,7 @@
                     </div>
                   </div>
 
-                  <div class="row mb-3">
-                    <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
-                    <div class="col-md-8 col-lg-9">
-                      <input name="email" type="email" class="form-control" id="Email" value="{{auth()->user()->email}}">
-                    </div>
-                  </div>
+
 
 
                   <div class="text-center">
@@ -230,6 +253,29 @@
       </div>
     </div>
   </section>
+
+
+  <script>
+    const fileInput = document.getElementById('file-input');
+    const imagePreview = document.getElementById('image-preview');
+    
+    fileInput.addEventListener('change', function () {
+      const file = fileInput.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          imagePreview.src = reader.result;
+          //imagePreview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        //imagePreview.style.display = 'none';
+      }
+    });
+    
+    
+    
+</script>
 
 
 <script>

@@ -9,6 +9,8 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+
+
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -17,6 +19,13 @@
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
 
 
   <!-- Favicons -->
@@ -81,6 +90,31 @@
     AOS.init();
   </script>
 
+@if (session('error'))
+
+    <script>
+        Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: '{{ session('error') }}'
+            })
+    </script>
+@endif
+
+@if (session('success'))
+
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'success',
+        text: '{{ session('success') }}'
+        })
+</script>
+@endif
+
 </body>
 
 </html>
+
+
+
