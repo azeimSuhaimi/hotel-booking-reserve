@@ -44,4 +44,50 @@ class authController extends Controller
         return back()->with('error','accout or password is wrong')->onlyInput('email');
 
     }//end method
-}
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+ 
+        $request->session()->invalidate();
+     
+        $request->session()->regenerateToken();
+
+        return redirect(route('auth.logout.page'));
+
+    }// end method
+
+    public function logout_page(Request $request)
+    {
+        return view('auth.logout');
+    }// end method
+
+    public function create(Request $request)
+    {
+        return view('auth.create');
+    }// end method
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            
+            'name' => 'required|string',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required',
+            
+            
+        ]);
+
+        $user = new User;
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        event(new Registered($user));
+
+        return redirect(route('auth'))->with('success','success create new account '.$validated['name']);
+
+    }// end method
+
+}//end class

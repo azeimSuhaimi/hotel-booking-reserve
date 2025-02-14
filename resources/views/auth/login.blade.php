@@ -76,13 +76,14 @@
                                     <a href="javascript: void(0);" class="social-list-item border-primary text-primary"><i class="mdi mdi-facebook"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="javascript: void(0);" class="social-list-item border-danger text-danger"><i class="mdi mdi-google"></i></a>
+                                    <a href="/auth/google/redirect" class="social-list-item border-danger text-danger"><i class="mdi mdi-google"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="javascript: void(0);" class="social-list-item border-info text-info"><i class="mdi mdi-twitter"></i></a>
+                                    <a href="" class="social-list-item border-info text-info"><i class="mdi mdi-twitter"></i></a>
                                 </li>
                                 <li class="list-inline-item">
-                                    <a href="javascript: void(0);" class="social-list-item border-secondary text-secondary"><i class="mdi mdi-github"></i></a>
+
+                                    <a href="/auth/github/redirect" class="social-list-item border-secondary text-secondary"><i class="mdi mdi-github"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -94,7 +95,7 @@
                 <div class="row mt-3">
                     <div class="col-12 text-center">
                         <p> <a href="auth-recoverpw.html" class="text-white-50 ms-1">Forgot your password?</a></p>
-                        <p class="text-white-50">Don't have an account? <a href="auth-register.html" class="text-white ms-1"><b>Sign Up</b></a></p>
+                        <p class="text-white-50">Don't have an account? <a href="{{route('auth.create')}}" class="text-white ms-1"><b>Sign Up</b></a></p>
                     </div> <!-- end col -->
                 </div>
                 <!-- end row -->

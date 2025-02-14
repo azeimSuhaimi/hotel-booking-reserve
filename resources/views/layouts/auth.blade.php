@@ -8,8 +8,22 @@
         <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
         <meta content="Coderthemes" name="author" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{asset('assets/images/favicon.ico')}}">
+
+        <script src="{{ asset('vendor/smart-ads/js/smart-banner.min.js') }}"></script>
+
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+          
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+      
+        <!-- sweet alert 2 -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 		<!-- Bootstrap css -->
 		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -56,7 +70,83 @@
         }
         
         </script>
+
+        <script>
+            AOS.init();
+        </script>
+
+        <script>
+
+
+
+
+            // https://sweetalert2.github.io/#download
+
+            function confirmAndSubmit(element) {
+            event.preventDefault();
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, ',
+                    cancelButtonText: 'cancel, '
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        element.submit();
+                    }
+
+                });
+            }
+
+            function confirmAndRedirect(element) {
+                event.preventDefault();
+
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, ',
+                    cancelButtonText: 'cancel, '
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = element.getAttribute('href');
+                    }
+
+                });
+            }
+        </script>
         
+
+        @if (session('error'))
+
+            <script>
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: '{{ session('error') }}'
+                    })
+            </script>
+        @endif
+
+        @if (session('success'))
+
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'success',
+                text: '{{ session('success') }}'
+                })
+        </script>
+        @endif
         
     </body>
 </html>
