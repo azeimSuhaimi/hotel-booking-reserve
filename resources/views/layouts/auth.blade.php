@@ -55,19 +55,19 @@
 
         <script>
             function showPassword() {
-            // Get the password input and checkbox elements
-            var password = document.getElementById("password");
-            var checkbox = document.getElementById("show_password");
-        
-            // Check the state of the checkbox
-            if (checkbox.checked) {
-                // If the checkbox is checked, change the input type to "text"
-                password.type = "text";
-            } else {
-                // If the checkbox is not checked, change the input type back to "password"
-                password.type = "password";
+                // Get the password input and checkbox elements
+                var password = document.getElementById("password");
+                var checkbox = document.getElementById("show_password");
+            
+                // Check the state of the checkbox
+                if (checkbox.checked) {
+                    // If the checkbox is checked, change the input type to "text"
+                    password.type = "text";
+                } else {
+                    // If the checkbox is not checked, change the input type back to "password"
+                    password.type = "password";
+                }
             }
-        }
         
         </script>
 
@@ -125,7 +125,6 @@
             }
         </script>
         
-
         @if (session('error'))
 
             <script>
@@ -139,13 +138,13 @@
 
         @if (session('success'))
 
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'success',
-                text: '{{ session('success') }}'
-                })
-        </script>
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'success',
+                    text: '{{ session('success') }}'
+                    })
+            </script>
         @endif
         
     </body>

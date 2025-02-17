@@ -9,12 +9,10 @@
         <div class="page-title-box">
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">UBold</a></li>
-                    <li class="breadcrumb-item"><a href="javascript: void(0);">Extra Pages</a></li>
-                    <li class="breadcrumb-item active">Starter</li>
+                    <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
             </div>
-            <h4 class="page-title">Starter</h4>
+            <h4 class="page-title">Dashboard</h4>
         </div>
     </div>
 </div>     
