@@ -1,12 +1,16 @@
 <?php
 
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 
 
 use App\Http\Controllers\authController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\dashboardController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::get('/', function () {
     return view('welcome');
@@ -31,15 +35,42 @@ Route::controller(authController::class)->group(function () {
     Route::get('/reset-password/{token}','reset')->name('password.reset')->middleware('guest');
     Route::post('/reset-password','reset_password')->name('password.update')->middleware('guest');
 
+    Route::get('/auth/varify','varify')->name('auth.varify');
+
 });// end group
 
 
 Route::controller(dashboardController::class)->group(function () {
 
-    Route::get('/dashboard','index')->name('dashboard')->middleware(['auth']);
+    Route::get('/dashboard','index')->name('dashboard')->middleware(['auth','verified']);
 
 
 });//end group
+
+
+
+
+###############################################################################
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+ 
+    return redirect(route('auth.varify'))->with('success','Your email has been successfully verified!');
+})->middleware([ 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+ 
+    return back()->with('success', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+###############################################################################
 
 
 
