@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\userController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\dashboardController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -46,6 +47,22 @@ Route::controller(dashboardController::class)->group(function () {
 
 
 });//end group
+
+Route::controller(userController::class)->group(function () {
+   
+    Route::get('/change_password','change_password')->name('user.change_password')->middleware(['auth','verified']);
+    Route::post('/change_password/update','change_password_update')->name('user.change_password_update')->middleware(['auth','verified']);
+    
+    Route::get('/activity_log','activity_log')->name('user.activity_log')->middleware(['auth','verified','check_toyyip']);
+
+    Route::get('/profiles','index')->name('user.profile')->middleware(['auth']);
+    
+    Route::post('/user_update_profile','update_profile')->name('user.update.profile')->middleware('auth');
+    Route::post('/user_remove_image','remove_image')->name('user.remove.image')->middleware('auth');
+    Route::post('/user_update_image','update_image')->name('user.update.image')->middleware('auth');
+
+
+});
 
 
 
