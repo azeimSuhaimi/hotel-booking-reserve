@@ -26,6 +26,10 @@
         <!-- sweet alert 2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <!-- Plugins css -->
+        <link href="{{asset('assets/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('assets/libs/dropify/css/dropify.min.css')}}" rel="stylesheet" type="text/css" />
+
 		<!-- Bootstrap css -->
 		<link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 		<!-- App css -->
@@ -101,6 +105,10 @@
 
         <!-- App js -->
         <script src="{{asset('assets/js/app.min.js')}}"></script>
+
+        <!-- Plugins js -->
+        <script src="{{asset('assets/libs/dropzone/min/dropzone.min.js')}}"></script>
+        <script src="{{asset('assets/libs/dropify/js/dropify.min.js')}}"></script>
 
         
         <script>

@@ -55,7 +55,7 @@ Route::controller(userController::class)->group(function () {
     
     Route::get('/activity_log','activity_log')->name('user.activity_log')->middleware(['auth','verified','check_toyyip']);
 
-    Route::get('/profiles','index')->name('user.profile')->middleware(['auth']);
+    Route::get('/profile','index')->name('user.profile')->middleware(['auth']);
     
     Route::post('/user_update_profile','update_profile')->name('user.update.profile')->middleware('auth');
     Route::post('/user_remove_image','remove_image')->name('user.remove.image')->middleware('auth');
