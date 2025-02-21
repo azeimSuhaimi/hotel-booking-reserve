@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Controllers\authController;
+use App\Http\Controllers\teamController;
 use App\Http\Controllers\userController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\dashboardController;
@@ -63,6 +64,13 @@ Route::controller(userController::class)->group(function () {
 
 
 });
+
+Route::controller(teamController::class)->group(function () {
+
+    Route::get('/all/team','index')->name('all.team')->middleware(['auth']);
+
+
+});//end group
 
 
 

@@ -59,6 +59,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('all.team')}}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> All Team </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Navigation</li>
     
                 <li>
