@@ -68,6 +68,11 @@ Route::controller(userController::class)->group(function () {
 Route::controller(teamController::class)->group(function () {
 
     Route::get('/all/team','index')->name('all.team')->middleware(['auth']);
+    Route::get('/add/team','add')->name('add.team')->middleware(['auth']);
+    Route::post('/store/team','store')->name('store.team')->middleware(['auth']);
+    Route::get('/delete/team','destroy')->name('delete.team')->middleware(['auth']);
+    Route::get('/edit/team/{id}','edit')->name('edit.team')->middleware(['auth']);
+    Route::post('/update/team/{id}','update')->name('update.team')->middleware(['auth']);
 
 
 });//end group

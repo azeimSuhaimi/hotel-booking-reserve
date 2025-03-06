@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class team extends Model
 {
-    protected $table = 'tesms';
+    protected $table = 'teams';
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $timestamps = true;
