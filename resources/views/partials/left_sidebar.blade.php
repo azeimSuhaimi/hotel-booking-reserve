@@ -52,6 +52,8 @@
 
             <ul id="side-menu">
 
+                @auth
+                @can('is_admin')
                 <li>
                     <a href="{{route('dashboard')}}">
                         <i class="mdi mdi-view-dashboard-outline"></i>
@@ -72,7 +74,9 @@
                         <span> Update Book Area </span>
                     </a>
                 </li>
+                @endcan
 
+                @endauth
                 <li class="menu-title">Navigation</li>
     
                 <li>
