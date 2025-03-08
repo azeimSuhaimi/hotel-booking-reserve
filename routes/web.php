@@ -77,6 +77,13 @@ Route::controller(teamController::class)->group(function () {
 
 });//end group
 
+//book area 
+Route::controller(teamController::class)->group(function () {
+
+    Route::get('/book/area','book_area_edit')->name('book_area.edit')->middleware(['auth']);
+    Route::post('/update/book_area/{id}','book_area_update')->name('update.book_area')->middleware(['auth']);
+});//end group
+
 
 
 

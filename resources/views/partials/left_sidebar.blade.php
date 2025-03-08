@@ -66,6 +66,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{route('book_area.edit')}}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Update Book Area </span>
+                    </a>
+                </li>
+
                 <li class="menu-title">Navigation</li>
     
                 <li>
