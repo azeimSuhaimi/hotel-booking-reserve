@@ -12,11 +12,10 @@ use App\Http\Controllers\teamController;
 use App\Http\Controllers\userController;
 use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\frontPageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::controller(authController::class)->group(function () {
 
@@ -82,6 +81,11 @@ Route::controller(teamController::class)->group(function () {
 
     Route::get('/book/area','book_area_edit')->name('book_area.edit')->middleware(['auth']);
     Route::post('/update/book_area/{id}','book_area_update')->name('update.book_area')->middleware(['auth']);
+});//end group
+
+Route::controller(frontPageController::class)->group(function () {
+
+    Route::get('/','index')->name('index')->middleware(['guest']);
 });//end group
 
 
