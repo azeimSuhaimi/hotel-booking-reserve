@@ -74,6 +74,13 @@
                         <span> Update Book Area </span>
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{route('roomtype')}}">
+                        <i class="mdi mdi-view-dashboard-outline"></i>
+                        <span> Room Type List </span>
+                    </a>
+                </li>
                 @endcan
 
                 @endauth

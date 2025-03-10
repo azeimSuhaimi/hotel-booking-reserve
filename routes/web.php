@@ -11,6 +11,7 @@ use App\Http\Controllers\authController;
 use App\Http\Controllers\teamController;
 use App\Http\Controllers\userController;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\roomtypeController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\frontPageController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -19,7 +20,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 Route::controller(authController::class)->group(function () {
 
-    Route::get('/auth','index')->name('auth')->middleware('guest');
+    Route::get('/auth','index')->name('login')->middleware('guest');
     Route::post('/auth','login')->name('auth.login')->middleware(['guest']);
 
     Route::get('/auth/create','create')->name('auth.create')->middleware('guest');
@@ -78,9 +79,15 @@ Route::controller(teamController::class)->group(function () {
 
 //book area 
 Route::controller(teamController::class)->group(function () {
-
     Route::get('/book/area','book_area_edit')->name('book_area.edit')->middleware(['auth']);
     Route::post('/update/book_area/{id}','book_area_update')->name('update.book_area')->middleware(['auth']);
+});//end group
+
+//book area 
+Route::controller(roomtypeController::class)->group(function () {
+    Route::get('/roomtype','index')->name('roomtype')->middleware(['auth']);
+    Route::get('/roomtype/create','create')->name('add.roomtype')->middleware(['auth']);
+    Route::post('/roomtype/store','store')->name('store.roomtype')->middleware(['auth']);
 });//end group
 
 Route::controller(frontPageController::class)->group(function () {
